@@ -1,4 +1,4 @@
-<p id="notice"><%= flash[:notice] %></p>
+<p class="notice"><%= flash[:notice] %></p>
 
 <h1>Books</h1>
 
@@ -28,24 +28,29 @@
 
 
 <h2>New book</h2>
-<% if @book.errors.any? %>
-  <%=@book.errors.count %>errors prohibited this book from being saved:
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @book.errors.any? %>
+    <div class="validates">
+      <h2 class="validates-text"><%=@book.errors.count %>errors prohibited this book from being saved:</h2>
+
+      <ul class="validates-message">
+        <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
 
 <%= form_with model: @book, url: '/books',method: :post do |f| %>
   <div class="field">
     <label for="book_title">Title</label>
-    <div class="text-field"><%= f.text_field :title %></div>
+    <%= f.text_field :title %>
   </div>
 
   <div class="field">
     <label for="book_body">Body</label>
-    <div class="text-area"><%= f.text_area :body %></div>
+    <%= f.text_area :body %>
   </div>
 
 
